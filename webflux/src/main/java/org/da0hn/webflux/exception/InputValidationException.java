@@ -8,9 +8,9 @@ public class InputValidationException extends RuntimeException {
 
   private static final String message = "Allowed range is 10 - 20";
   private final int errorCode = 100;
-  private final int input;
+  private final Integer input;
 
-  public InputValidationException(final int input) {
+  public InputValidationException(final Integer input) {
     super(message);
     this.input = input;
   }
@@ -19,7 +19,7 @@ public class InputValidationException extends RuntimeException {
     return this.errorCode;
   }
 
-  public int getInput() {
+  public Integer getInput() {
     return this.input;
   }
 }

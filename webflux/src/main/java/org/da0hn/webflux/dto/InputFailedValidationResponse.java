@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class InputFailedValidationResponse {
-  private final int errorCode;
-  private final int input;
+  private final Integer errorCode;
+  private final Integer input;
   private final String message;
 }

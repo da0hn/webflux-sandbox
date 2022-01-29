@@ -3,6 +3,7 @@ package org.da0hn.webflux.config;
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.MultiplyRequest;
 import org.da0hn.webflux.dto.Response;
+import org.da0hn.webflux.exception.InputValidationException;
 import org.da0hn.webflux.services.AsyncMathService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,22 @@ public class RequestHandler {
     final var request = serverRequest.bodyToMono(MultiplyRequest.class);
     final var response = this.service.multiply(request);
     return ServerResponse.ok().body(response, Response.class);
+  }
+
+  public Mono<ServerResponse> squareHandlerWithValidation(final ServerRequest serverRequest) {
+    final var input = serverRequest.queryParam("input")
+      .map(Integer::parseInt)
+      .orElse(null);
+
+    if(input == null) {
+      return Mono.error(new InputValidationException(null));
+    }
+
+    if(input < 10 || input > 20) {
+      return Mono.error(new InputValidationException(input));
+    }
+
+    final var square = this.service.findSquare(input);
+    return ServerResponse.ok().body(square, Response.class);
   }
 }
