@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.Response;
 import org.da0hn.webflux.exception.InputValidationException;
 import org.da0hn.webflux.services.AsynchronousMathService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,4 +39,16 @@ public class AsyncMathValidationController {
       .cast(Integer.class)
       .flatMap(this.service::findSquare);
   }
+
+
+  @GetMapping("/assignment")
+  public Mono<ResponseEntity<Response>> assignment(@RequestParam final int input) {
+    return Mono.just(input)
+      .filter(value -> value >= 10 && value <= 20)
+      .flatMap(this.service::findSquare)
+      .map(ResponseEntity::ok)
+      .defaultIfEmpty(ResponseEntity.badRequest().build());
+  }
+
+
 }
