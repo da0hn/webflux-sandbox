@@ -1,8 +1,8 @@
 package org.da0hn.webflux.controllers;
 
+import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.Response;
 import org.da0hn.webflux.services.SynchronousMathService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,16 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/math")
+@AllArgsConstructor
+@RequestMapping("/synchronous-math")
 public class SynchronousMathController {
 
   private final SynchronousMathService service;
-
-
-  @Autowired
-  public SynchronousMathController(final SynchronousMathService service) {
-    this.service = service;
-  }
 
   @GetMapping("/square")
   public Response findSquare(@RequestParam final int input) {
