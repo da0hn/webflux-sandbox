@@ -1,1 +1,3 @@
-webflux-course
+# Webflux sandbox
+
+Learning Spring Webflux.
