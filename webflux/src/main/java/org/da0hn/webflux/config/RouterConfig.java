@@ -5,6 +5,7 @@ import org.da0hn.webflux.dto.InputFailedValidationResponse;
 import org.da0hn.webflux.exception.InputValidationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -29,6 +30,12 @@ public class RouterConfig {
   private RouterFunction<ServerResponse> routeToMathHandlers() {
     return RouterFunctions.route()
       .GET("/square", this.handler::squareHandler)
+      .GET(
+        "/square/{input}",
+        RequestPredicates.path("*/1?").or(RequestPredicates.path("*/20?")),
+        this.handler::squarePathVariableHandler
+      )
+      .GET("/square/{input}", req -> ServerResponse.badRequest().bodyValue("Only 10-20 inputs allowed"))
       .GET("/table", this.handler::tableHandler)
       .GET("/stream-table", this.handler::tableStreamHandler)
       .POST("/multiply", this.handler::multiplyHandler)

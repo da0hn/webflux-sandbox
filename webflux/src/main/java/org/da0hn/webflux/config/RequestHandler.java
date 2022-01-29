@@ -25,6 +25,12 @@ public class RequestHandler {
     return ServerResponse.ok().body(square, Response.class);
   }
 
+  public Mono<ServerResponse> squarePathVariableHandler(final ServerRequest serverRequest) {
+    final var input = Integer.parseInt(serverRequest.pathVariable("input"));
+    final var square = this.service.findSquare(input);
+    return ServerResponse.ok().body(square, Response.class);
+  }
+
   public Mono<ServerResponse> tableHandler(final ServerRequest serverRequest) {
     final var input = serverRequest.queryParam("input")
       .map(Integer::parseInt)
