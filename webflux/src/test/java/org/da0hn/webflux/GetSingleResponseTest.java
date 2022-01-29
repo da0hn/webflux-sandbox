@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetSingleResponseTest extends BaseTest {
@@ -27,5 +28,19 @@ class GetSingleResponseTest extends BaseTest {
     assertEquals(EXPECTED, response.getOutput());
   }
 
-
+  @Test
+  @DisplayName("Non blocking endpoint call")
+  void test2() {
+    final var response = this.webClient.get()
+      .uri(builder -> builder.path("/asynchronous-math/square")
+        .queryParam("input", 10)
+        .build()
+      )
+      .retrieve()
+      .bodyToMono(Response.class); // Mono<Response>
+    final var EXPECTED = 100;
+    StepVerifier.create(response)
+      .expectNextMatches(value -> value.getOutput() == EXPECTED)
+      .verifyComplete();
+  }
 }
