@@ -1,8 +1,9 @@
-package org.da0hn.webflux.config;
+package org.da0hn.webflux.routers;
 
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.InputFailedValidationResponse;
 import org.da0hn.webflux.exception.InputValidationException;
+import org.da0hn.webflux.handlers.RequestHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RequestPredicates;
@@ -16,7 +17,7 @@ import java.util.function.BiFunction;
 
 @Configuration
 @AllArgsConstructor
-public class RouterConfig {
+public class BaseRouter {
 
   private final RequestHandler handler;
 
@@ -40,7 +41,7 @@ public class RouterConfig {
       .GET("/stream-table", this.handler::tableStreamHandler)
       .POST("/multiply", this.handler::multiplyHandler)
       .GET("/square-validation", this.handler::squareHandlerWithValidation)
-      .onError(InputValidationException.class, RouterConfig.inputValidationHandler())
+      .onError(InputValidationException.class, BaseRouter.inputValidationHandler())
       .build();
   }
 

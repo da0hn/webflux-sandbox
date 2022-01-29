@@ -1,4 +1,4 @@
-package org.da0hn.webflux.config;
+package org.da0hn.webflux.handlers;
 
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.MultiplyRequest;

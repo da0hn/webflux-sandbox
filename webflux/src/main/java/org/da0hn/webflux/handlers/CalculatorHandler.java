@@ -1,4 +1,4 @@
-package org.da0hn.webflux.config;
+package org.da0hn.webflux.handlers;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;

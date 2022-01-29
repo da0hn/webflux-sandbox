@@ -1,6 +1,7 @@
-package org.da0hn.webflux.config;
+package org.da0hn.webflux.routers;
 
 import lombok.AllArgsConstructor;
+import org.da0hn.webflux.handlers.CalculatorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RequestPredicate;
