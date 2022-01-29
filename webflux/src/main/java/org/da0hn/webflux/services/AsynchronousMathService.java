@@ -1,5 +1,6 @@
 package org.da0hn.webflux.services;
 
+import org.da0hn.webflux.dto.MultiplyRequest;
 import org.da0hn.webflux.dto.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,4 +28,8 @@ public class AsynchronousMathService {
       .map(index -> new Response(index * input));
   }
 
+  public Mono<Response> multiply(final Mono<? extends MultiplyRequest> request) {
+    return request.map(req -> req.getFirst() * req.getSecond())
+      .map(Response::new);
+  }
 }
