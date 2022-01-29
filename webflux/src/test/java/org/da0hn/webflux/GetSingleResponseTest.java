@@ -1,5 +1,6 @@
 package org.da0hn.webflux;
 
+import org.da0hn.webflux.config.IntegrationTest;
 import org.da0hn.webflux.dto.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,13 +9,15 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@IntegrationTest
+@DisplayName("Get Mono Responses")
 class GetSingleResponseTest extends BaseTest {
 
   @Autowired
   private WebClient webClient;
 
   @Test
-  @DisplayName("Blocking endpoint call")
+  @DisplayName("Blocking get one item")
   void test1() {
     final var response = this.webClient.get()
       .uri(builder -> builder.path("/asynchronous-math/square")
@@ -29,7 +32,7 @@ class GetSingleResponseTest extends BaseTest {
   }
 
   @Test
-  @DisplayName("Non blocking endpoint call")
+  @DisplayName("Non blocking get one item")
   void test2() {
     final var response = this.webClient.get()
       .uri(builder -> builder.path("/asynchronous-math/square")

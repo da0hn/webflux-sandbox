@@ -1,5 +1,6 @@
 package org.da0hn.webflux;
 
+import org.da0hn.webflux.config.IntegrationTest;
 import org.da0hn.webflux.dto.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.test.StepVerifier;
 
+@IntegrationTest
+@DisplayName("Get Flux Responses")
 class GetMultiResponseTest extends BaseTest {
 
   @Autowired
