@@ -3,6 +3,7 @@ package org.da0hn.webflux.controllers;
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.Response;
 import org.da0hn.webflux.services.AsynchronousMathService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,4 +27,11 @@ public class AsynchronousMathController {
   public Flux<Response> multiplicationTable(@RequestParam final int input) {
     return this.service.multiplicationTable(input);
   }
+
+
+  @GetMapping(value = "/table-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+  public Flux<Response> multiplicationTableStream(@RequestParam final int input) {
+    return this.service.multiplicationTable(input);
+  }
+
 }
