@@ -1,6 +1,7 @@
 package org.da0hn.webflux.config;
 
 import lombok.AllArgsConstructor;
+import org.da0hn.webflux.dto.MultiplyRequest;
 import org.da0hn.webflux.dto.Response;
 import org.da0hn.webflux.services.AsyncMathService;
 import org.springframework.http.MediaType;
@@ -39,5 +40,11 @@ public class RequestHandler {
     return ServerResponse.ok()
       .contentType(MediaType.TEXT_EVENT_STREAM)
       .body(square, Response.class);
+  }
+
+  public Mono<ServerResponse> multiplyHandler(final ServerRequest serverRequest) {
+    final var request = serverRequest.bodyToMono(MultiplyRequest.class);
+    final var response = this.service.multiply(request);
+    return ServerResponse.ok().body(response, Response.class);
   }
 }
