@@ -3,7 +3,7 @@ package org.da0hn.webflux.controllers;
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.Response;
 import org.da0hn.webflux.exception.InputValidationException;
-import org.da0hn.webflux.services.AsynchronousMathService;
+import org.da0hn.webflux.services.AsyncMathService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/asynchronous-math")
 public class AsyncMathValidationController {
 
-  private final AsynchronousMathService service;
+  private final AsyncMathService service;
 
   @GetMapping("/validation")
   public Mono<Response> findSquare(@RequestParam final int input) {

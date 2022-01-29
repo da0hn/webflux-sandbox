@@ -3,7 +3,7 @@ package org.da0hn.webflux.controllers;
 import lombok.AllArgsConstructor;
 import org.da0hn.webflux.dto.MultiplyRequest;
 import org.da0hn.webflux.dto.Response;
-import org.da0hn.webflux.services.AsynchronousMathService;
+import org.da0hn.webflux.services.AsyncMathService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +20,9 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/asynchronous-math")
-public class AsynchronousMathController {
+public class AsyncMathController {
 
-  private final AsynchronousMathService service;
+  private final AsyncMathService service;
 
   @GetMapping("/square")
   public Mono<Response> findSquare(@RequestParam final int input) {

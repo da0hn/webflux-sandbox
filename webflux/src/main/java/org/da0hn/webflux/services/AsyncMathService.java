@@ -11,10 +11,10 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 
 @Service
-public class AsynchronousMathService {
+public class AsyncMathService {
 
   private static final Duration ONE_SECOND = Duration.ofSeconds(1);
-  private static final Logger LOGGER = LoggerFactory.getLogger(AsynchronousMathService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AsyncMathService.class);
 
   public Mono<Response> findSquare(final int input) {
     return Mono.fromSupplier(() -> input * input)
