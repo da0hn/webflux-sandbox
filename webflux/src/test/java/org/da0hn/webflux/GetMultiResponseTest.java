@@ -30,5 +30,20 @@ class GetMultiResponseTest extends BaseTest {
       .verifyComplete();
   }
 
+  @Test
+  @DisplayName("Non blocking get list as Stream")
+  void test2() {
+    final var response = this.webClient.get()
+      .uri(builder -> builder.path("/asynchronous-math/table-stream")
+        .queryParam("input", 10)
+        .build()
+      )
+      .retrieve()
+      .bodyToFlux(Response.class) // Flux<Response>
+      .doOnNext(System.out::println);
 
+    StepVerifier.create(response)
+      .expectNextCount(10)
+      .verifyComplete();
+  }
 }
