@@ -12,13 +12,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/math")
-public class MathSynchronousController {
+public class SynchronousMathController {
 
   private final MathService mathService;
 
 
   @Autowired
-  public MathSynchronousController(final MathService mathService) {
+  public SynchronousMathController(final MathService mathService) {
     this.mathService = mathService;
   }
 
