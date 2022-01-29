@@ -20,18 +20,24 @@ public class RouterConfig {
   private final RequestHandler handler;
 
   @Bean
-  public RouterFunction<ServerResponse> serverResponseRouterFunction() {
+  public RouterFunction<ServerResponse> highLevelRouter() {
     return RouterFunctions.route()
-      .GET("/router/square", this.handler::squareHandler)
-      .GET("/router/table", this.handler::tableHandler)
-      .GET("/router/stream-table", this.handler::tableStreamHandler)
-      .POST("/router/multiply", this.handler::multiplyHandler)
-      .GET("/router/square-validation", this.handler::squareHandlerWithValidation)
-      .onError(InputValidationException.class, this.inputValidationHandler())
+      .path("/router", this::routeToMathHandlers)
       .build();
   }
 
-  private BiFunction<Throwable, ServerRequest, Mono<ServerResponse>> inputValidationHandler() {
+  private RouterFunction<ServerResponse> routeToMathHandlers() {
+    return RouterFunctions.route()
+      .GET("/square", this.handler::squareHandler)
+      .GET("/table", this.handler::tableHandler)
+      .GET("/stream-table", this.handler::tableStreamHandler)
+      .POST("/multiply", this.handler::multiplyHandler)
+      .GET("/square-validation", this.handler::squareHandlerWithValidation)
+      .onError(InputValidationException.class, RouterConfig.inputValidationHandler())
+      .build();
+  }
+
+  private static BiFunction<Throwable, ServerRequest, Mono<ServerResponse>> inputValidationHandler() {
     return (error, request) -> {
       final InputValidationException exception = (InputValidationException) error;
       final var response = new InputFailedValidationResponse(
