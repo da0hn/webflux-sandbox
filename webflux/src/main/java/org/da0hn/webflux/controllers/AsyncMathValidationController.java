@@ -25,4 +25,17 @@ public class AsyncMathValidationController {
     return this.service.findSquare(input);
   }
 
+  @GetMapping("/async-validation")
+  public Mono<Response> findSquareAsync(@RequestParam final int input) {
+    return Mono.just(input)
+      .handle((value, sink) -> {
+        if(value < 10 || value > 20) {
+          sink.error(new InputValidationException(value));
+          return;
+        }
+        sink.next(value);
+      })
+      .cast(Integer.class)
+      .flatMap(this.service::findSquare);
+  }
 }
