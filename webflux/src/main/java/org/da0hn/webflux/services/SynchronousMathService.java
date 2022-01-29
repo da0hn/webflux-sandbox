@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Service
-public class MathService {
+public class SynchronousMathService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(MathService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SynchronousMathService.class);
 
 
   public Response findSquare(final int input) {
