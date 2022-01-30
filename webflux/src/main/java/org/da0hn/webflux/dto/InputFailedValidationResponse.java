@@ -1,10 +1,14 @@
 package org.da0hn.webflux.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class InputFailedValidationResponse {
-  private final Integer errorCode;
-  private final Integer input;
-  private final String message;
+  private Integer errorCode;
+  private Integer input;
+  private String message;
 }
