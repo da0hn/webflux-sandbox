@@ -7,8 +7,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-
 @Getter
 @Setter
 @Document
@@ -21,12 +19,12 @@ public class Product {
   private Double price;
 
   @Override public int hashCode() {
-    return Objects.hash(this.id);
+    return this.id.hashCode();
   }
 
-  @Override public boolean equals(final Object o) {
-    if(this == o) return true;
-    if(!(o instanceof final Product product)) return false;
+  @Override public boolean equals(final Object that) {
+    if(this == that) return true;
+    if(!(that instanceof final Product product)) return false;
     return this.id.equals(product.id);
   }
 }
