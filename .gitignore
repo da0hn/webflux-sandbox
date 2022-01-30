@@ -142,4 +142,6 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+.docker/*
+
 # End of https://www.toptal.com/developers/gitignore/api/maven,intellij+all,java
