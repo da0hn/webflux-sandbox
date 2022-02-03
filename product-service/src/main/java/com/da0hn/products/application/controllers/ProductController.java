@@ -2,9 +2,11 @@ package com.da0hn.products.application.controllers;
 
 import com.da0hn.products.application.ProductRequest;
 import com.da0hn.products.application.ProductResponse;
+import com.da0hn.products.application.mappers.ProductPriceRangeRequest;
 import com.da0hn.products.core.product.CreateProduct;
 import com.da0hn.products.core.product.DeleteProductById;
 import com.da0hn.products.core.product.GetAllProducts;
+import com.da0hn.products.core.product.GetAllProductsInPriceRange;
 import com.da0hn.products.core.product.GetProductById;
 import com.da0hn.products.core.product.UpdateProduct;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,7 @@ public class ProductController {
   private final GetAllProducts getAllProducts;
   private final GetProductById getProductById;
   private final UpdateProduct updateProduct;
+  private final GetAllProductsInPriceRange getAllProductsInPriceRange;
 
   @PostMapping
   public Mono<ProductResponse> create(@RequestBody final Mono<ProductRequest> request) {
@@ -64,5 +67,11 @@ public class ProductController {
     return this.deleteProductById.execute(id);
   }
 
+  @GetMapping("/price-range")
+  public Flux<ProductResponse> getAllInPriceRange(
+    final ProductPriceRangeRequest request
+  ) {
+    return this.getAllProductsInPriceRange.execute(request);
+  }
 
 }
