@@ -1,4 +1,4 @@
-package com.da0hn.products.core;
+package com.da0hn.products.core.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
