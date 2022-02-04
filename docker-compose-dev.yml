@@ -43,7 +43,7 @@ services:
     ports:
       - '5433:5432'
     volumes:
-      - .docker/postgres:/var/lib/postgresql/data
+      - .docker/user_db:/var/lib/postgresql/data
     restart: always
     networks:
       - microservice_network
