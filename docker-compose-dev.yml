@@ -11,7 +11,7 @@ services:
     ports:
       - '27017:27017'
     networks:
-      - mongo_network
+      - microservice_network
   mongo_express:
     image: mongo-express
     container_name: mongo_express
@@ -29,12 +29,26 @@ services:
     depends_on:
       - product_db
     networks:
-      - mongo_network
+      - microservice_network
     ports:
       - '8081:8081'
     restart: unless-stopped
+  user_db:
+    container_name: user_db
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5433:5432'
+    volumes:
+      - .docker/postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - microservice_network
 networks:
-  mongo_network:
+  microservice_network:
     driver: bridge
-    name: mongo_network
+    name: microservice_network
 
