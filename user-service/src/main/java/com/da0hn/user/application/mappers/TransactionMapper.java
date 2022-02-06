@@ -6,7 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(
+)
 public interface TransactionMapper {
 
   TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
@@ -14,6 +15,7 @@ public interface TransactionMapper {
 
   @Mapping(target = "id", source = "id")
   @Mapping(target = "amount", source = "amount")
+  @Mapping(target = "status", ignore = true)
   TransactionResponse map(Transaction transaction);
 
 }
