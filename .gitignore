@@ -114,7 +114,9 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-.docker/*
+.docker/user_db/*
+.docker/product_db/*
+.docker/mongo_express/*
 
 .gradle
 **/build/
