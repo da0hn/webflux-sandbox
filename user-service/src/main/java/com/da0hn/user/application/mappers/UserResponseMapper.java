@@ -16,6 +16,6 @@ public interface UserResponseMapper {
 
   @Mapping(target = "id", source = "id")
   @Mapping(target = "name", source = "name")
-  @Mapping(target = "amount", source = "amount")
+  @Mapping(target = "balance", source = "balance")
   UserResponse map(User user);
 }

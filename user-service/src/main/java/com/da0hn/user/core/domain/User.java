@@ -17,5 +17,5 @@ public class User {
   @Id
   private Long id;
   private String name;
-  private Double amount;
+  private Double balance;
 }

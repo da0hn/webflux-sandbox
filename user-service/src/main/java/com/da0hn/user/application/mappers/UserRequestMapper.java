@@ -15,7 +15,7 @@ public interface UserRequestMapper {
   UserRequestMapper INSTANCE = Mappers.getMapper(UserRequestMapper.class);
 
   @Mapping(target = "name", source = "name")
-  @Mapping(target = "amount", source = "amount")
+  @Mapping(target = "balance", source = "balance")
   @Mapping(target = "id", ignore = true)
   User map(UserRequest request);
 
