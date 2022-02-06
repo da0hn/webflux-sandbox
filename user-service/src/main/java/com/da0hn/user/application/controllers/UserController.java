@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ public class UserController {
   }
 
   @GetMapping("/{id-user}")
-  public Mono<ResponseEntity<UserResponse>> getById(@RequestParam("id-user") final Long idUser) {
+  public Mono<ResponseEntity<UserResponse>> getById(@PathVariable("id-user") final Long idUser) {
     return this.getUserById.execute(idUser)
       .map(ResponseEntity::ok)
       .defaultIfEmpty(ResponseEntity.notFound().build());
@@ -54,7 +55,7 @@ public class UserController {
 
   @PutMapping("/{id-user}")
   public Mono<ResponseEntity<UserResponse>> update(
-    @RequestBody final Mono<UserRequest> request,
+    @PathVariable final Mono<UserRequest> request,
     @RequestParam("id-user") final Long idUser
   ) {
     return this.updateUser.execute(request, idUser)
@@ -63,7 +64,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id-user}")
-  public Mono<ResponseEntity<Object>> deleteById(@RequestParam("id-user") final Long idUser) {
+  public Mono<ResponseEntity<Object>> deleteById(@PathVariable("id-user") final Long idUser) {
     return this.deleteUserById.execute(idUser)
       .map(e -> ResponseEntity.noContent().build())
       .defaultIfEmpty(ResponseEntity.notFound().build());
