@@ -12,6 +12,7 @@ services:
       - '27017:27017'
     networks:
       - microservice_network
+    restart: always
   mongo_express:
     image: mongo-express
     container_name: mongo_express
@@ -32,7 +33,7 @@ services:
       - microservice_network
     ports:
       - '8081:8081'
-    restart: unless-stopped
+    restart: always
   user_db:
     container_name: user_db
     image: postgres
