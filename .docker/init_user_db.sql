@@ -13,6 +13,6 @@ CREATE TABLE transactions
     user_id bigint,
     amount  double precision,
     date    timestamp,
-    foreign key (user_id) references users (id)
+    foreign key (user_id) references users (id) on delete cascade
 );
 
