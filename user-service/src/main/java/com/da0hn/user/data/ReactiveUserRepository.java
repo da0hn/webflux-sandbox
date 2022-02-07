@@ -3,6 +3,7 @@ package com.da0hn.user.data;
 import com.da0hn.user.core.domain.User;
 import org.springframework.data.r2dbc.repository.Modifying;
 import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -13,9 +14,14 @@ public interface ReactiveUserRepository extends ReactiveCrudRepository<User, Lon
 
   @Modifying
   @Query("""
-          UPDATE users SET balance = balance - :amount
-          WHERE id = :idUser and balance >= :amount
+          UPDATE users
+          SET balance = balance - :amount
+          WHERE id = :idUser
+          and balance >= :amount
          """)
-  Mono<Boolean> updateUserBalance(Long idUser, Double amount);
+  Mono<Boolean> updateUserBalance(
+    @Param("idUser") Long idUser,
+    @Param("amount") Double amount
+  );
 
 }

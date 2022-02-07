@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class Transaction {
 
   @Id
   private Long id;
+  @Column("user_id")
   private Long idUser;
   private Double amount;
   private LocalDateTime date;
