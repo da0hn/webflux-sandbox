@@ -28,6 +28,15 @@ public interface TransactionResponseMapper {
   TransactionResponse map(Transaction transaction, Status status);
 
   @Mappings({
+    @Mapping(target = "id", source = "transaction.id"),
+    @Mapping(target = "createdAt", source = "transaction.date"),
+    @Mapping(target = "idUser", source = "transaction.idUser"),
+    @Mapping(target = "amount", source = "transaction.amount"),
+    @Mapping(target = "status", ignore = true)
+  })
+  TransactionResponse map(Transaction transaction);
+
+  @Mappings({
     @Mapping(target = "id", ignore = true),
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())"),
     @Mapping(target = "idUser", source = "request.idUser"),
