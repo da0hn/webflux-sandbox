@@ -12,9 +12,9 @@ public interface TransactionRequestMapper {
   TransactionRequestMapper INSTANCE = Mappers.getMapper(TransactionRequestMapper.class);
 
 
-  @Mapping(target = "amount", source = "amount")
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "idUser", ignore = true)
+  @Mapping(target = "amount", source = "amount")
+  @Mapping(target = "idUser", source = "idUser")
   @Mapping(target = "date", expression = "java(java.time.LocalDateTime.now())")
   Transaction map(TransactionRequest request);
 

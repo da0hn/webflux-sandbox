@@ -19,6 +19,8 @@ public interface TransactionResponseMapper {
 
   @Mappings({
     @Mapping(target = "id", source = "transaction.id"),
+    @Mapping(target = "createdAt", source = "transaction.date"),
+    @Mapping(target = "idUser", source = "transaction.idUser"),
     @Mapping(target = "amount", source = "transaction.amount"),
     @Mapping(target = "status", source = "status")
   })

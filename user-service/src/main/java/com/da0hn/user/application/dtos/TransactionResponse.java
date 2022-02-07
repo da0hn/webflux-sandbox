@@ -1,8 +1,12 @@
 package com.da0hn.user.application.dtos;
 
+import java.time.LocalDateTime;
+
 public record TransactionResponse(
   Long id,
-  Long amount,
-  Status status
+  Double amount,
+  Long idUser,
+  Status status,
+  LocalDateTime createdAt
 ) {
 }
