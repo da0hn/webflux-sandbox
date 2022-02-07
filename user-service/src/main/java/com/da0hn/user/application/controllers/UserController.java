@@ -56,8 +56,8 @@ public class UserController {
 
   @PutMapping("/{id-user}")
   public Mono<ResponseEntity<UserResponse>> update(
-    @PathVariable final Mono<UserRequest> request,
-    @RequestParam("id-user") final Long idUser
+    @RequestBody final Mono<UserRequest> request,
+    @PathVariable("id-user") final Long idUser
   ) {
     return this.updateUser.execute(request, idUser)
       .map(ResponseEntity::ok)
