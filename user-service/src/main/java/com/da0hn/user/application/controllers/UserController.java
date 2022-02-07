@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -33,8 +33,9 @@ public class UserController {
   private final UpdateUser updateUser;
 
   @GetMapping
-  public Flux<ResponseEntity<UserResponse>> getAll() {
+  public Mono<ResponseEntity<List<UserResponse>>> getAll() {
     return this.getAllUsers.execute()
+      .collectList()
       .map(ResponseEntity::ok)
       .defaultIfEmpty(ResponseEntity.noContent().build());
   }
