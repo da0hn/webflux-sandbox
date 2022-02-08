@@ -60,6 +60,17 @@ services:
       - user_db
     networks:
       - microservice_network
+  product_service:
+    container_name: product_service
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    ports:
+      - '8091:8091'
+    depends_on:
+      - product_db
+    networks:
+      - microservice_network
 networks:
   microservice_network:
     driver: bridge
