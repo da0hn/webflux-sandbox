@@ -13,7 +13,7 @@ public interface PurchaseOrderMapper {
   PurchaseOrderMapper INSTANCE = Mappers.getMapper(PurchaseOrderMapper.class);
 
   @Mappings({
-    @Mapping(target = "idProduct", source = "context.productResponse.idProduct"),
+    @Mapping(target = "idProduct", source = "context.productResponse.id"),
     @Mapping(target = "idUser", source = "context.transactionResponse.idUser"),
     @Mapping(target = "amount", source = "context.transactionResponse.amount"),
     @Mapping(target = "status", source = "context.status")
