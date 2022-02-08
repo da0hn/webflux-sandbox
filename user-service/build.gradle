@@ -32,6 +32,19 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.0.Beta2'
 }
 
+jar {
+    doFirst {
+        manifest {
+            if (!configurations.compile.isEmpty()) {
+                attributes(
+                        'Class-Path': configurations.compile.collect { it.toURI().toString() }.join(' '),
+                        'Main-Class': 'org.da0hn.user.UserServiceApplication')
+            }
+        }
+    }
+}
+
+
 tasks.withType(JavaCompile) {
     options.compilerArgs = [
             '-Amapstruct.suppressGeneratorTimestamp=true'

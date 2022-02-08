@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  user_service:
+    container_name: user_service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - '8092:8092'
+    networks:
+      - services_network
+networks:
+  services_network:
+    driver: bridge
+    name: services_network

@@ -49,6 +49,17 @@ services:
     restart: always
     networks:
       - microservice_network
+  user_service:
+    container_name: user_service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - '8092:8092'
+    depends_on:
+      - user_db
+    networks:
+      - microservice_network
 networks:
   microservice_network:
     driver: bridge
